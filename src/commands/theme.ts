@@ -12,12 +12,7 @@ class Theme extends Command {
 	execute(args: string[]) {
 	const arg = args[0]
 
-	if (!arg) {
-		utility.displayErrorMessage("Please provide a theme.")
-		return
-	}
-
-	if (arg === "--list") {
+	if (!arg ||arg === "--list") {
 		const lines = Object.keys(themes)
 		loopLines(lines, 100)
 		return
