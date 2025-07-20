@@ -1,6 +1,6 @@
-// import { myterminal } from "../main.js";
-// import { displayOutputMessage } from "../utility.js";
-// import { Command } from "./abstract.js";
+// import { myterminal } from "../main";
+// import { displayOutputMessage } from "../utility";
+// import { Command } from "./abstract";
 
 // let login = "theyosefegy";
 

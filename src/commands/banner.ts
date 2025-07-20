@@ -1,20 +1,15 @@
-import { loopLines } from "../animation.js";
-import { Command } from "./abstract.js";
-import { myterminal } from "../main.js";
-
-/**
- * The Banner command displays an ASCII art banner in the terminal.
- * It is used to welcome users and provide a brief introduction to the terminal.
- */
+import { loopLines } from "../animation";
+import dom from "../dom";
+import { Command } from "./abstract";
 
 class Banner extends Command {
 	constructor() {
 		super("banner", "Displays an ASCII banner.");
 	}
 
-	execute(args: any[] = []) {
+	execute(args: string[]) {
 		const preElement = document.createElement("pre");
-		myterminal.appendChild(preElement);
+		dom.terminal.appendChild(preElement);
 		const ascii = `
 '
    __   __  _______  _______  _______  _______  __   _______    _______  _______  ______    __   __  ___   __    _  _______  ___     	 
@@ -33,4 +28,5 @@ class Banner extends Command {
 	}
 }
 
-export { Banner };
+
+export default Banner

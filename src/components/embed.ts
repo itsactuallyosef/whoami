@@ -1,7 +1,7 @@
-import { typetext } from "../animation.js";
-import { Component } from "./abstract.js";
+import { typetext } from "../animation";
+import { Component } from "./abstract";
 
-export class Embed extends Component {
+class Embed extends Component {
 	title?: string;
 	description?: string;
 	link?: string;
@@ -139,3 +139,5 @@ export class Embed extends Component {
 		});
 	}
 }
+
+export { Embed }

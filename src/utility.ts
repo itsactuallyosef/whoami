@@ -1,14 +1,13 @@
-import { myterminal, texter, typer } from "./main.js";
-import { typetext } from "./animation.js";
-
-import { Command, commandMap } from "./commands/abstract.js";
+import { typetext } from "./animation";
+import { Command, commandMap } from "./commands/abstract";
+import dom from "./dom";
 
 function displayErrorMessage(msg: string) {
 	const errorOutput = document.createElement("p");
 	errorOutput.classList.add("error");
 
 	typetext(msg, errorOutput, 1);
-	myterminal.append(errorOutput); // Insert before the input line
+	dom.terminal.append(errorOutput); // Insert before the input line
 }
 
 function displayOutputMessage(message: string,  isPreloaded = false, animationDelay: number = 0) {
@@ -19,10 +18,10 @@ function displayOutputMessage(message: string,  isPreloaded = false, animationDe
 
 	typetext(message, output, animationDelay);
 
-	texter.value = "";
-	typer.textContent = "";
+	dom.texter.value = "";
+	dom.typer.textContent = "";
 
-	myterminal.append(output); // Insert before the input line
+	dom.terminal.append(output); // Insert before the input line
 }
 
 function findCommandByAlias(alias: string): Command | null {
@@ -57,28 +56,19 @@ function findCommandByAlias(alias: string): Command | null {
 	return null;
 }
 
-function handleCommand(commandString: string) {
-	if (!commandString.trim()) return;
+function handleCommand(commandName: string) {
+	if (!commandName.trim()) return;
 
-	displayOutputMessage(commandString, true);
+	displayOutputMessage(commandName, true);
 
-	// Split commandString into command and args
-	const [command, ...args] = commandString.trim().split(" ");
+	const [command, ...args] = commandName.trim().split(" ");
 
-	// Check if the command exists in commandMap or if it's an alias
-	let commandHandler =
+	let commandHandler: Command =
 		commandMap.get(command.toLowerCase()) ||
 		findCommandByAlias(command.toLowerCase());
 
-	// Execute the command if found, otherwise show error message
 	if (commandHandler) {
-		try {
-			commandHandler.execute(args);
-		} catch (error) {
-			console.error(
-				`An error occurred while executing the command "${command}": ${error}`
-			);
-		}
+		commandHandler.execute(args);
 	} else {
 		displayErrorMessage(
 			`The command "${command}" is not recognized. Type "help" for a list of available commands.`
@@ -86,9 +76,4 @@ function handleCommand(commandString: string) {
 	}
 }
 
-function register(name: string, command: Command): Command {
-	commandMap.set(name, command);
-	return command
-}
-
-export {displayErrorMessage, displayOutputMessage, handleCommand, register}
+export default {displayErrorMessage, displayOutputMessage, handleCommand}

@@ -1,0 +1,31 @@
+{
+  "name": "terfolio",
+  "version": "1.0.0",
+  "description": "A portfolio-like terminal interface",
+  "main": "index.js",
+  "scripts": {
+    "serve": "python3 -m http.server 8000",
+    "build": "webpack --stats"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsactuallyosef/Portfolio-like-terminal.git"
+  },
+  "keywords": [],
+  "author": "itsactuallyosef",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itsactuallyosef/Portfolio-like-terminal/issues"
+  },
+  "homepage": "https://github.com/itsactuallyosef/Portfolio-like-terminal#readme",
+  "devDependencies": {
+    "@types/eslint": "^9.6.1",
+    "@types/estree": "^1.0.8",
+    "@types/json-schema": "^7.0.15",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.3",
+    "webpack": "^5.100.2",
+    "webpack-cli": "^6.0.1"
+  }
+}

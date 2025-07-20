@@ -1,5 +1,5 @@
-import { commandMap } from "./commands/abstract.js";
-import { myterminal, typer } from "./main.js";
+import { commandMap } from "./commands/abstract";
+import dom from "./dom";
 
 /**
  * the typetext function types out the text in the specified element with a delay.
@@ -66,7 +66,7 @@ function updateTyper(command: string) {
 		  )}</span>`
 		: "";
 
-	typer.innerHTML = highlightedText;
+	dom.typer.innerHTML = highlightedText;
 }
 
 export { typetext, loopLines, updateTyper, addLine };

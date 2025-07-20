@@ -1,5 +1,5 @@
-// import { loopLines } from "../animation.js";
-// import { Command } from "./abstract.js";
+// import { loopLines } from "../animation";
+// import { Command } from "./abstract";
 
 // class Social extends Command {
 // 	constructor() {

@@ -1,15 +1,15 @@
-import { loopLines } from "../animation.js";
-import { Command } from "./abstract.js";
-import { myterminal } from "../main.js";
+import { loopLines } from "../animation";
+import { Command } from "./abstract";
+import dom from "../dom";
 
-export class WhoIsMe extends Command {
+class WhoIsMe extends Command {
 	constructor() {
 		super("whoisme", "Who is Yosef?");
 	}
 
 	execute(args: any[]) {
 		const preElement = document.createElement("pre");
-		myterminal.appendChild(preElement);
+		dom.terminal.appendChild(preElement);
 		const aboutme = `
 -
 Hey, I'm Yosef!👋  
@@ -37,3 +37,5 @@ I’m excited to see where this journey takes me next—and what I can create as
 		loopLines(preElement, aboutme.split("\n"), 100);
 	}
 }
+
+export default WhoIsMe

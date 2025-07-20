@@ -1,20 +1,19 @@
-import { commandMap, Command } from "./abstract.js";
-
-import { displayErrorMessage, displayOutputMessage } from "../utility.js";
+import { commandMap, Command } from "./abstract";
+import util from "../utility";
 
 class Alias extends Command {
 	constructor() {
 		super("alias", "Creates a shorcut for a command.");
 	}
 
-	execute(args: any[]): void{
+	execute(args: string[]): void{
 		if (args.length < 2) {
-			displayErrorMessage("Please provide both the command and the alias.");
+			util.displayErrorMessage("Please provide both the command and the alias.");
 			return;
 		}
 
 		if (args.length > 2) {
-			displayErrorMessage(
+			util.displayErrorMessage(
 				"Too many arguments provided. Please provide only the command and the alias."
 			);
 			return;
@@ -23,7 +22,7 @@ class Alias extends Command {
 		const [command, alias] = args.map((arg: any) => arg.toLowerCase());
 
 		if (command == alias) {
-			displayErrorMessage(
+			util.displayErrorMessage(
 				"The alias cannot be the same as the command."
 			);
 			return;
@@ -31,7 +30,7 @@ class Alias extends Command {
 
 		// Check if alias already exists
 		if (window.localStorage.getItem(alias)) {
-			displayErrorMessage(
+			util.displayErrorMessage(
 				`The alias "${alias}" already exists. Please choose a different alias.`
 			);
 			return;
@@ -44,7 +43,7 @@ class Alias extends Command {
 			// if the command does exist, add the alias you wrote to its list of aliases
 			console.log(command, commandEntry);
 
-			displayOutputMessage(
+			util.displayOutputMessage(
 				`Alias "${alias}" has been successfully created for the command "${command}".`,
 				
 			);
@@ -52,11 +51,11 @@ class Alias extends Command {
 			// Store the updated aliases in localStorage
 			window.localStorage.setItem(alias, command);
 		} else {
-			displayErrorMessage(
+			util.displayErrorMessage(
 				`The command "${command}" does not exist. Cannot create an alias.`
 			);
 		}
 	}
 }
 
-export { Alias};
+export default Alias

@@ -1,6 +1,7 @@
-import { myterminal } from "../main.js";
-import { displayOutputMessage, displayErrorMessage } from "../utility.js";
-import { Command } from "./abstract.js";
+import dom from "../dom";
+import util from "../utility";
+import { Command } from "./abstract";
+
 
 class Clear extends Command {
 	constructor() {
@@ -8,7 +9,7 @@ class Clear extends Command {
 	}
 
 	async execute(args: any[]) {
-		myterminal.textContent = "";
+		dom.terminal.textContent = "";
 	}
 }
 
@@ -24,18 +25,18 @@ class Exit extends Command {
 
 class Echo extends Command {
 	constructor() {
-		super("echo", "     Prints a message in the terminal.");
+		super("echo", "Prints a message in the terminal.");
 	}
 
 	async execute(args: any[]) {
 		const message = args.join(" ");
 
 		if (!message) {
-			displayErrorMessage("Please provide a message to print.", );
+			util.displayErrorMessage("Please provide a message to print.", );
 		}
 
-		displayOutputMessage(message);
+		util.displayOutputMessage(message);
 	}
 }
 
-export { Echo, Clear, Exit };
+export default {Exit, Echo, Clear}

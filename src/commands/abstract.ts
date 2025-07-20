@@ -1,14 +1,3 @@
-// Commands Register
-
-export * from "./abstract.js";
-export * from "./alias.js";
-export * from "./banner.js";
-export * from "./basic_cmds.js";
-// export * from "./help.js";
-// export * from "./social.js";
-export * from "./unalias.js";
-export * from "./whoisme.js";
-
 const commandMap = new Map;
 
 class Command {
@@ -29,7 +18,7 @@ class Command {
 	/**
 	 * @param args Arguments for the command execution
 	 */
-	execute(args: any[] = []): void {
+	execute(args: string[]): void {
 		throw new Error("Method 'execute()' must be implemented.");
 	}
 
