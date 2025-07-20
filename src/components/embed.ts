@@ -2,6 +2,16 @@ import { typetext } from "../animation.js";
 import { Component } from "./abstract.js";
 
 export class Embed extends Component {
+	title?: string;
+	description?: string;
+	link?: string;
+	imageURL?: string;
+	color?: string;
+	footer?: string;
+	fields?: { title: string; value: string }[];
+	container: any;
+	fieldsContainer?: HTMLDivElement;
+
 	constructor({
 		title,
 		description,
@@ -10,6 +20,14 @@ export class Embed extends Component {
 		color = "#997c51",
 		footer,
 		fields = [],
+	}: {
+		title: string;
+		description: string;
+		link: string;
+		imageURL: string;
+		color?: string;
+		footer: string;
+		fields?: { title: string; value: string }[];
 	}) {
 		super(); // Call the constructor of Component
 		this.title = title;
@@ -69,7 +87,7 @@ export class Embed extends Component {
 			const embedLink = document.createElement("a");
 			embedLink.href = this.link;
 			embedLink.textContent = "View More";
-			embedLink.style.color = this.color;
+			embedLink.style.color = this.color ?? "#997c51";
 			embedLink.style.textDecoration = "none";
 			embedLink.style.fontWeight = "bold";
 			embedLink.target = "_blank";
@@ -89,16 +107,18 @@ export class Embed extends Component {
 		}
 	}
 
-	createField(key, value) {
-		this.fields.push({ title: key, value: value });
+	createField(key: string, value: string) {
+		(this.fields ??= []).push({ title: key, value: value });
 		this.updateFields();
 	}
 
 	updateFields() {
 		// Clear existing fields
-		this.fieldsContainer.innerHTML = "";
+		if (this.fieldsContainer) {
+			this.fieldsContainer.innerHTML = "";
+		}
 
-		if (this.fields.length === 0) return;
+		if (!this.fieldsContainer || !this.fields || this.fields.length === 0) return;
 
 		// Create and append fields
 		this.fields.forEach((field) => {
@@ -115,7 +135,7 @@ export class Embed extends Component {
 
 			fieldElement.appendChild(fieldTitle);
 			fieldElement.appendChild(fieldValue);
-			this.fieldsContainer.appendChild(fieldElement);
+			this.fieldsContainer!.appendChild(fieldElement);
 		});
 	}
 }

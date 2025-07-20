@@ -1,7 +1,13 @@
 import { commandMap } from "./commands/abstract.js";
 import { myterminal, typer } from "./main.js";
 
-export function typetext(text, element, delay = 15) {
+/**
+ * the typetext function types out the text in the specified element with a delay.
+ * @param {string} text - The text to type out.
+ * @param {HTMLElement} element - The HTML element where the text will be typed.
+ * @param {number} delay - The delay between each character being typed.
+ */
+function typetext(text: string, element: HTMLElement, delay = 15) {
 	if (!text) return;
 
 	if (element.classList.contains("no-animation")) {
@@ -19,22 +25,21 @@ export function typetext(text, element, delay = 15) {
 	}, delay);
 }
 
-function addLine(text, delay) {
-	let formattedText = text.split("  ").join("&nbsp;&nbsp;");
+function addLine(element: HTMLElement, text:string, delay:number) {
 
 	setTimeout(() => {
 		let newLine = document.createElement("p");
-		newLine.innerHTML = formattedText;
+		newLine.innerHTML = text;
 
-		myterminal.appendChild(newLine);
+		element.appendChild(newLine);
 
 		window.scrollTo(0, document.body.scrollHeight);
 	}, delay);
 }
 
-export async function loopLines(lines, delay) {
+function loopLines(element: HTMLElement, lines: string[], delay: number = 100) {
 	lines.forEach((line, index) => {
-		addLine(line, index * delay);
+		addLine(element, line, index * delay);
 	});
 }
 
@@ -44,8 +49,8 @@ export async function loopLines(lines, delay) {
 // it will check if the commands in the commands Map starts with the input the user entered,
 // if so the function will keep updating the "typer" element with the text the user entered and the rest of the matched command.
 
-export function updateTyper(command) {
-	const suggestions = [];
+function updateTyper(command: string) {
+	const suggestions: string[] = [];
 
 	commandMap.forEach((key, _) => {
 		if (key.name.startsWith(command.toLowerCase())) suggestions.push(key.name);
@@ -63,3 +68,5 @@ export function updateTyper(command) {
 
 	typer.innerHTML = highlightedText;
 }
+
+export { typetext, loopLines, updateTyper, addLine };

@@ -1,13 +1,17 @@
-import { loopLines } from "../animation.js";
-import { Command } from "./abstract.js";
-
-export class WhoIsMe extends Command {
-	constructor() {
-		super("whoisme", "  Who is Yosef?");
-	}
-
-	async execute(args) {
-		const aboutme = `
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.WhoIsMe = void 0;
+const animation_js_1 = require("../animation.js");
+const abstract_js_1 = require("./abstract.js");
+const main_js_1 = require("../main.js");
+class WhoIsMe extends abstract_js_1.Command {
+    constructor() {
+        super("whoisme", "Who is Yosef?");
+    }
+    execute(args) {
+        const preElement = document.createElement("pre");
+        main_js_1.myterminal.appendChild(preElement);
+        const aboutme = `
 -
 Hey, I'm Yosef!👋  
 I’m a software engineer dedicated to building engaging, high-quality websites like this one.
@@ -30,7 +34,7 @@ My goal? To keep learning, keep growing, and maybe even make a significant impac
 I’m excited to see where this journey takes me next—and what I can create as I strive to become the best version of myself.
 -
 `;
-
-		loopLines(aboutme.split("\n"), 100);
-	}
+        (0, animation_js_1.loopLines)(preElement, aboutme.split("\n"), 100);
+    }
 }
+exports.WhoIsMe = WhoIsMe;

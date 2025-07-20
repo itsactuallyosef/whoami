@@ -1,23 +1,18 @@
 import { updateTyper } from "./animation.js";
-import { commandMap } from "./commands/abstract.js";
-import { Alias } from "./commands/alias.js";
-import { Banner } from "./commands/banner.js";
-import { Clear, Echo, Exit } from "./commands/basic_cmds.js";
-import { Github } from "./commands/github.js";
-import { Help } from "./commands/help.js";
-import { Projects } from "./commands/projects.js";
-import { Social } from "./commands/social.js";
-import { Unalias } from "./commands/unalias.js";
-import { WhoIsMe } from "./commands/whoisme.js";
 import { handleCommand } from "./utility.js";
+import * as Commands from "./commands/abstract.js";
 
-export const myterminal = document.getElementById("terminal");
-export const commandLine = document.querySelector(".command");
-export const preloadedCMDS = document.getElementById("preloaded");
-export const texter = document.getElementById("texter");
-export const typer = document.getElementById("typer");
+const myterminal = document.getElementById("terminal") as HTMLDivElement;
+const texter = document.getElementById("texter") as HTMLInputElement;
+const typer = document.getElementById("typer") as HTMLSpanElement;
+const commandLine = document.querySelector(".command");
+const preloadedCMDS = document.getElementById("preloaded");
 
 let currentIndex = -1; // Initialize index for cycling through matches
+
+if (!texter || !typer) {
+	throw new Error("Texter or Typer element not found. Ensure the HTML structure is correct.");
+}
 
 texter.addEventListener("input", () => {
 	typer.textContent = texter.value;
@@ -47,7 +42,7 @@ texter.addEventListener("keydown", (event) => {
 
 		// Find matching command keys
 		const matches = [];
-		for (let [key, _] of commandMap.entries()) {
+		for (let [key, _] of Commands.commandMap.entries()) {
 			if (key.startsWith(inputText)) {
 				matches.push(key);
 			}
@@ -71,20 +66,9 @@ window.addEventListener("click", () => {
 });
 
 document.addEventListener("DOMContentLoaded", async () => {
-	new Banner().execute();
+	new Commands.Banner().execute();
 	texter.focus();
 	updateTyper(texter.value);
 });
 
-// Commands Register
-new Help().register(commandMap);
-new WhoIsMe().register(commandMap);
-new Social().register(commandMap);
-new Github().register(commandMap);
-new Projects().register(commandMap);
-new Banner().register(commandMap);
-new Clear().register(commandMap);
-new Alias().register(commandMap);
-new Unalias().register(commandMap);
-new Echo().register(commandMap);
-new Exit().register(commandMap);
+export { myterminal, texter, typer, commandLine, preloadedCMDS}
