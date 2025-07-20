@@ -9,7 +9,7 @@ export default {
   entry: "./src/main.ts",
   output: {
     filename: "bundle.js",
-    path: _resolve(__dirname, "dist"),
+    path: _resolve(__dirname, "./docs/dist"),
   },
   module: {
     rules: [
