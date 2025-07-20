@@ -10,22 +10,22 @@ class Theme extends Command {
 	}
 
 	execute(args: string[]) {
-	const arg = args[0]
+		const arg = args[0]
 
-	if (!arg ||arg === "--list") {
-		const lines = Object.keys(themes)
-		loopLines(lines, 100)
-		return
+		if (!arg ||arg === "--list") {
+			const lines = Object.keys(themes)
+			loopLines(lines, 100)
+			return
+		}
+
+		if (!(arg in themes)) {
+			utility.displayErrorMessage(`Theme "${arg}" not found. Try '--list' to see available themes.`)
+			return
+		}
+
+		ThemeController.applyTheme(arg)
+		utility.displayOutputMessage(`Switched to theme: ${arg}`)
 	}
-
-	if (!(arg in themes)) {
-		utility.displayErrorMessage(`Theme "${arg}" not found. Try '--list' to see available themes.`)
-		return
-	}
-
-	ThemeController.applyTheme(arg)
-	utility.displayOutputMessage(`Switched to theme: ${arg}`)
-}
 }
 
 export default Theme;
