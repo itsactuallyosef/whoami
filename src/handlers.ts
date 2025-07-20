@@ -2,7 +2,6 @@ import { updateTyper } from "./animation";
 import dom from "./dom";
 import util from "./utility";
 
-
 function handleInput() {
     dom.typer.textContent = dom.texter.value;
     updateTyper(dom.texter.value);

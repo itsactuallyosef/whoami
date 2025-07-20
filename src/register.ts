@@ -5,12 +5,15 @@ import Banner from "./commands/banner";
 import basic_cmds from "./commands/basic_cmds";
 import Github from "./commands/github";
 import Help from "./commands/help";
+import Social from "./commands/social";
 import Unalias from "./commands/unalias";
 import WhoIsMe from "./commands/whoisme";
+
 
 commandMap.set("help", new Help());
 commandMap.set("github", new Github());
 commandMap.set("whoisme", new WhoIsMe());
+commandMap.set("social", new Social());
 commandMap.set("clear", new basic_cmds.Clear())
 commandMap.set("banner", new Banner());
 commandMap.set("alias", new Alias());

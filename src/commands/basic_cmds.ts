@@ -15,7 +15,7 @@ class Clear extends Command {
 
 class Exit extends Command {
 	constructor() {
-		super("exit", "     Exits the terminal.");
+		super("exit", "Exits the terminal.");
 	}
 
 	async execute(args: any[]) {

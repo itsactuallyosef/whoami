@@ -26,10 +26,9 @@ function typetext(text: string, element: HTMLElement, delay = 15) {
 }
 
 function addLine(element: HTMLElement, text:string, delay:number) {
-
 	setTimeout(() => {
 		let newLine = document.createElement("p");
-		newLine.innerHTML = text;
+		newLine.innerHTML = text
 
 		element.appendChild(newLine);
 
@@ -37,9 +36,13 @@ function addLine(element: HTMLElement, text:string, delay:number) {
 	}, delay);
 }
 
-function loopLines(element: HTMLElement, lines: string[], delay: number = 100) {
+function loopLines(lines: string[], delay: number = 100) {
+	const pre = document.createElement("pre") as HTMLPreElement
+	pre.classList.add("animated")
+	dom.terminal.appendChild(pre)
+
 	lines.forEach((line, index) => {
-		addLine(element, line, index * delay);
+		addLine(pre, line, index * delay);
 	});
 }
 

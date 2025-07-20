@@ -1,15 +1,21 @@
 :root {
-	--command: #8c6b59;
-	--preloded-text: #b89076;
-	--bg: #211d1b;
-	--err: #9c8394;
-	--cursor: #73abad;
-	--prompt: #519975;
+	--command-name: #8c6b59;
+	--preloaded-text: #519975;
+	--background-color: #211d1b;
+	--err-color: #9c8394;
+	--typer-color: #73abad;
+	--cursor-color	: #73abad;
+	--prompt-color: #519975;
 	--terminalFont: monospace;
+	--link: #ce97bd;
+	--link-hover: #b796d6;
+	--command-description: #fff;
+	--accent-color: #ffffffbb;
+	--copyright-text: rgb(180, 180, 129);
 }
 
 ::-webkit-scrollbar {
-	background-color: var(--bg);
+	background-color: var(--background-color);
 	width: 5px;
 }
 
@@ -33,25 +39,22 @@ h6 {
 
 p {
 	margin: 0;
+	color: var(--preloaded-text);
 }
 
-pre {
+pre.animated p {
 	padding: 0;
 	margin: 0;
-	color: var(--prompt);
+	color: var(--accent-color);
 }
 
 body {
-	color: var(--preloded-text);
 	display: flex;
 	flex-direction: column;
-	height: 100%;
 	margin: 0px;
 	padding: 15px 20px;
-	background-color: var(--bg);
+	background-color: var(--background-color);
 	font-family: var(--terminalFont);
-	font-weight: 100;
-	font-size: 16px;
 	align-content: space-around;
 }
 
@@ -60,7 +63,6 @@ body {
 #terminal {
 	max-width: 1200px; /* Maximum width to ensure it doesn't get too wide on large screens */
 	width: 95%;
-	overflow-x: hidden;
 	overflow-y: scroll;
 	box-sizing: border-box; /* Includes padding and borders in the element's width and height */
 }
@@ -75,7 +77,7 @@ body {
 
 .command {
 	display: flex;
-	color: var(--command);
+	color: red;
 	cursor: text;
 	flex-wrap: wrap; /* Allow wrapping on smaller screens */
 	box-sizing: border-box;
@@ -83,37 +85,54 @@ body {
 }
 
 .social-link {
-	color: var(--err);
+	color: var(--link);
 	text-decoration: none;
 }
 
 .social-link:hover {
-	background-color: #73abad;
+	background-color: var(--link-hover);
 	color: black;
 }
 
-/* The command name inside the help menu */
-span.command-help {
-	color: var(--cursor);
-	text-transform: capitalize;
-	margin: 3px 0px 3px 10px;
-	text-shadow: 0 0 5px #73abad;
+/* Help menu commands */
+span.command-name {
+	text-transform: uppercase;
+	margin: 3px 0px 0px 0px;
+	text-shadow: 0 0 5px var(--command-name);
+	color: var(--command-name);
+	margin-right: 50px;
+	min-width: 50px;
 }
+
+span.command-description {
+	color: var(--command-description);
+}
+
+.help-entry {
+	display: flex;
+	gap: 5px 20px 5px 10px;
+	align-items: flex-start;
+	margin: 5px 0;
+}
+
+
+
+/* Input */
 
 #typer {
 	display: inline-block;
 	white-space: pre; /* Preserves both spaces and line breaks */
-	color: #73abad;
+	color: var(--typer-color);
 	margin-bottom: 30px;
 }
 
 .preloaded-msg {
-	color: var(--preloded-text);
+	color: var(--preloaded-text);
 }
-
+/* 
 #terminal p.preloaded-msg {
 	color: var(--prompt);
-}
+}	 */
 
 .command #typer::before,
 p.preloaded-msg::before {
@@ -122,7 +141,7 @@ p.preloaded-msg::before {
 }
 
 p.error {
-	color: var(--err);
+	color: var(--err-color);
 }
 
 @keyframes blink {
@@ -137,71 +156,22 @@ p.error {
 	white-space: pre-line; /* Preserves both spaces and line breaks */
 }
 
-/* Projects Command */
-.repo-container {
-	display: flex;
-	position: relative;
-	justify-content: center;
-	margin: 0;
-	max-width: 50%;
-	padding: 10px 0;
-	background-color: #0f0d0b;
-	margin: 10px 0;
-}
-
-.repo-container i {
-	color: var(--prompt);
-	font-size: 14px;
-	margin-right: 10px;
-}
-
-.repo-name {
-	text-decoration: none;
-	margin: 0;
-	color: var(--command);
-	font-size: 16px;
-	font-weight: 400;
-}
-
-.repo-name:hover {
-	text-decoration: underline;
-	cursor: pointer;
-}
-
-.repo-container::before,
-.repo-container::after {
-	position: absolute;
-	font-weight: 100;
-	font-size: 43px;
-	top: -0.22em;
-	color: var(--prompt);
-}
-
-.repo-container::before {
-	content: "[";
-	left: -0.18em;
-}
-.repo-container::after {
-	content: "]";
-	right: -0.2em;
-}
-
 .copyright {
-	color: rgb(180, 180, 129);
+	color: var(--copyright-text);
 }
 
 /* Cursor */
 
 .cursor {
 	display: inline-block;
-	background-color: var(--cursor);
-	font-size: 12px;
+	background-color: var(--cursor-color);
+	font-size: 10px;
 	color: transparent;
 	position: relative;
 	opacity: 1;
 	top: -3px;
-	height: 1.5em;
-	width: 10px;
+	height: 1.2em;
+	width: 5px;
 	max-width: 10px;
 	transform: translateY(4px);
 	overflow: hidden;

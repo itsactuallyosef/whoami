@@ -4,7 +4,7 @@ import { Command, commandMap } from "./abstract";
 
 class Unalias extends Command {
 	constructor() {
-		super("unalias", "  Removes either all commands or for a specific one.");
+		super("unalias", "Removes either all commands or for a specific one.");
 	}
 
 	execute(args: any[]) {

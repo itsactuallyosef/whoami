@@ -12,7 +12,7 @@ class Command {
 	}
 
 	__repr__() {
-		return `<span class="command-help">${this.name}</span> ${this.description}`;
+		return `<div class="help-entry"><span class="command-name">${this.name}</span>| <span class="command-description">${this.description}</span></div>`;
 	}
 
 	/**
