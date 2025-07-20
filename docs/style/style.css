@@ -103,7 +103,7 @@ span.command-name {
 	text-shadow: 0 0 5px var(--command-name);
 	color: var(--command-name);
 	margin-right: 50px;
-	min-width: 50px;
+	min-width: 60px;
 }
 
 span.command-description {
@@ -112,9 +112,9 @@ span.command-description {
 
 .help-entry {
 	display: flex;
-	gap: 5px 20px 5px 10px;
+	gap: 20px;
 	align-items: flex-start;
-	margin: 5px 0;
+	margin: 3px 0;
 }
 
 

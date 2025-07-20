@@ -1,7 +1,7 @@
 import { commandMap } from "./commands/abstract";
 
 import Alias from "./commands/alias";
-import Banner from "./commands/banner";
+import Cowsay from "./commands/cowsay";
 import basic_cmds from "./commands/basic_cmds";
 import Github from "./commands/github";
 import Help from "./commands/help";
@@ -16,7 +16,7 @@ commandMap.set("github", new Github());
 commandMap.set("whoisme", new WhoIsMe());
 commandMap.set("social", new Social());
 commandMap.set("clear", new basic_cmds.Clear())
-commandMap.set("banner", new Banner());
+commandMap.set("cowsay", new Cowsay());
 commandMap.set("theme", new Theme())
 commandMap.set("alias", new Alias());
 commandMap.set("unalias", new Unalias());
