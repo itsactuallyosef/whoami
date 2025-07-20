@@ -6,6 +6,7 @@ import basic_cmds from "./commands/basic_cmds";
 import Github from "./commands/github";
 import Help from "./commands/help";
 import Social from "./commands/social";
+import Theme from "./commands/theme";
 import Unalias from "./commands/unalias";
 import WhoIsMe from "./commands/whoisme";
 
@@ -16,6 +17,7 @@ commandMap.set("whoisme", new WhoIsMe());
 commandMap.set("social", new Social());
 commandMap.set("clear", new basic_cmds.Clear())
 commandMap.set("banner", new Banner());
+commandMap.set("theme", new Theme())
 commandMap.set("alias", new Alias());
 commandMap.set("unalias", new Unalias());
 commandMap.set("clear", new basic_cmds.Clear())

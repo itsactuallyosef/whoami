@@ -6,7 +6,7 @@ class Social extends Command {
 		super("social", "Lists all my social networks.");
 	}
 
-	async execute(args: any[]) {
+	execute(args: any[]) {
 		const social = [
 			"</br>",
 			"<p style='margin-left:20px;'>Linkedin      <a class='social-link' target='_blank' href='https://www.linkedin.com/in/yosef-mohamed-9563a22aa'>linkedin/YosefMohamed/</a></p>",

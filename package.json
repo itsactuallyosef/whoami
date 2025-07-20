@@ -4,7 +4,7 @@
   "description": "A portfolio-like terminal interface",
   "main": "index.js",
   "scripts": {
-    "serve": "python3 -m http.server 8000",
+    "serve": "python3 -m http.server 8000 -d docs/",
     "build": "webpack --stats"
   },
   "type": "module",

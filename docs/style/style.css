@@ -12,6 +12,7 @@
 	--command-description: #fff;
 	--accent-color: #ffffffbb;
 	--copyright-text: rgb(180, 180, 129);
+	--autocomplete: #85c4c680;
 }
 
 ::-webkit-scrollbar {
@@ -152,7 +153,7 @@ p.error {
 
 .suggestion {
 	display: inline-block;
-	color: #85c4c680;
+	color: var(--autocomplete);
 	white-space: pre-line; /* Preserves both spaces and line breaks */
 }
 
