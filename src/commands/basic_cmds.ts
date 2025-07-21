@@ -1,6 +1,6 @@
 import dom from "../dom";
 import util from "../utility";
-import { Command } from "./abstract";
+import { Command, CommandError } from "./abstract";
 
 
 class Clear extends Command {
@@ -32,7 +32,7 @@ class Echo extends Command {
 		const message = args.join(" ");
 
 		if (!message) {
-			util.displayErrorMessage("Please provide a message to print.", );
+			throw new CommandError("Please provide a message to print.", );
 		}
 
 		util.displayOutputMessage(message);

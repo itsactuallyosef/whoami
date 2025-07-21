@@ -1,5 +1,5 @@
 
-import { Command } from "./abstract";
+import { Command, CommandError } from "./abstract";
 import utility from "../utility";
 import ThemeController, { themes } from "../util/ThemeController";
 import { loopLines } from "../animation";
@@ -19,8 +19,7 @@ class Theme extends Command {
 		}
 
 		if (!(arg in themes)) {
-			utility.displayErrorMessage(`Theme "${arg}" not found. Try '--list' to see available themes.`)
-			return
+			throw new CommandError(`Theme "${arg}" not found. Try '--list' to see available themes.`)
 		}
 
 		ThemeController.applyTheme(arg)

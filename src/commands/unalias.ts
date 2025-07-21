@@ -1,5 +1,5 @@
 import util from "../utility";
-import { Command, commandMap } from "./abstract";
+import { Command, CommandError, commandMap } from "./abstract";
 
 
 class Unalias extends Command {
@@ -8,11 +8,14 @@ class Unalias extends Command {
 	}
 
 	execute(args: any[]) {
+		if (!args.length) {
+			throw new CommandError("missing alias name. Usage: unalias <name>")
+		}
+
 		const arg = args[0].toLowerCase();
 
 		if (!arg) {
-			util.displayErrorMessage("Please enter either 'all' or a specific command.");
-			return;
+			throw new CommandError("Please enter either 'all' or a specific command.");
 		}
 
 		switch (arg) {
@@ -27,13 +30,11 @@ class Unalias extends Command {
 			default:
 				const command = commandMap.get(arg);
 				if (!command) {
-					util.displayErrorMessage(`The command "${arg}" is not recognized.`);
-					return;
+					throw new CommandError(`The command "${arg}" is not recognized.`);
 				}
 				
 				if (command.aliases.length === 0 && !localStorage.getItem(arg)) {
-					util.displayErrorMessage(`No aliases found for "${arg}".`);
-					return;
+					throw new CommandError(`No aliases found for "${arg}".`);
 				}
 
 				if (command.aliases.length > 0) {

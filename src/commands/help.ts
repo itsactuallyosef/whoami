@@ -5,11 +5,8 @@ class Help extends Command {
 	constructor() {
 		super("help", "Displays all available commands.");
 	}
-	// Implement the execute method
-	execute(args: string[]) {
-		// // Example: Display available commands
-		
 
+	execute(args: string[]) {
 		let lines = ["<br/>"];
 
 		if (args.length) {

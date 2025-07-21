@@ -1,3 +1,4 @@
+import { CommandError } from "../commands/abstract";
 import utility from "../utility"
 
 class ThemeController {
@@ -10,8 +11,7 @@ class ThemeController {
     applyTheme(name: string) {
         const theme = themes[name]
         if (!theme) {
-            utility.displayErrorMessage(`The theme ${theme} doesn't exist...`)
-            return
+            throw new CommandError(`The theme ${theme} doesn't exist...`)
         }
 
         Object.entries(theme).forEach(([key, value]) => {

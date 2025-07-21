@@ -1,4 +1,4 @@
-import { commandMap, Command } from "./abstract";
+import { commandMap, Command, CommandError } from "./abstract";
 import util from "../utility";
 
 class Alias extends Command {
@@ -8,32 +8,28 @@ class Alias extends Command {
 
 	execute(args: string[]): void{
 		if (args.length < 2) {
-			util.displayErrorMessage("Please provide both the command and the alias.");
-			return;
+			throw new CommandError("Please provide both the command and the alias.");
 		}
 
 		if (args.length > 2) {
-			util.displayErrorMessage(
+			throw new CommandError(
 				"Too many arguments provided. Please provide only the command and the alias."
 			);
-			return;
 		}
 
 		const [command, alias] = args.map((arg: any) => arg.toLowerCase());
 
 		if (command == alias) {
-			util.displayErrorMessage(
+			throw new CommandError(
 				"The alias cannot be the same as the command."
 			);
-			return;
 		}
 
 		// Check if alias already exists
 		if (window.localStorage.getItem(alias)) {
-			util.displayErrorMessage(
+			throw new CommandError(
 				`The alias "${alias}" already exists. Please choose a different alias.`
 			);
-			return;
 		}
 
 		// Check if command exists
@@ -51,7 +47,7 @@ class Alias extends Command {
 			// Store the updated aliases in localStorage
 			window.localStorage.setItem(alias, command);
 		} else {
-			util.displayErrorMessage(
+			throw new CommandError(
 				`The command "${command}" does not exist. Cannot create an alias.`
 			);
 		}

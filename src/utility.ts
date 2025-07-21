@@ -1,5 +1,5 @@
 import { typetext } from "./animation";
-import { Command, commandMap } from "./commands/abstract";
+import { Command, CommandError, commandMap } from "./commands/abstract";
 import dom from "./dom";
 
 function displayErrorMessage(msg: string) {
@@ -56,23 +56,32 @@ function findCommandByAlias(alias: string): Command | null {
 	return null;
 }
 
-function handleCommand(commandName: string) {
-	if (!commandName.trim()) return;
+function handleCommand(input: string) {
+	if (!input.trim()) return;
 
-	displayOutputMessage(commandName, true);
+	displayOutputMessage(input, true); // echo the command
 
-	const [command, ...args] = commandName.trim().split(" ");
+	try {
+		const [name, ...args] = input.trim().split(/\s+/);
 
-	let commandHandler: Command =
-		commandMap.get(command.toLowerCase()) ||
-		findCommandByAlias(command.toLowerCase());
+		const command =
+			commandMap.get(name.toLowerCase()) ||
+			findCommandByAlias(name.toLowerCase());
 
-	if (commandHandler) {
-		commandHandler.execute(args);
-	} else {
-		displayErrorMessage(
-			`The command "${command}" is not recognized. Type "help" for a list of available commands.`
-		);
+		if (!command) {
+			throw new CommandError(
+				`The command "${name}" is not recognized. Type "help" to see available commands.`
+			);
+		}
+
+		command.execute(args);
+	} catch (err) {
+		if (err instanceof CommandError) {
+			displayErrorMessage(err.message);
+		} else {
+			console.error(err);
+			displayErrorMessage("An unexpected error occurred.");
+		}
 	}
 }
 

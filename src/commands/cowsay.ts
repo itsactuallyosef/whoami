@@ -1,9 +1,5 @@
 import { loopLines } from "../animation";
-import dom from "../dom";
-import utility from "../utility";
-import { Command } from "./abstract";
-
-
+import { Command, CommandError } from "./abstract";
 
 class Cowsay extends Command {
 	constructor() {
@@ -12,15 +8,15 @@ class Cowsay extends Command {
 
 	async execute(args: string[]) {
 	if (args.length === 0) {
-		utility.displayErrorMessage("Please provide a message.");
-		return;
+		throw new CommandError("Please provide a message.")
 	}
 
 	let figure = "default";
 	let message = args.join(" ");
 
 	// check if the first arg is a valid figure
-	const knownFigures = ["default", "tux", "dragon", "moose", "elephant"]; // list what you know works
+	const knownFigures = ["default", "tux", "dragon", "moose", "elephant",
+	"ghostbusters", "kitty", "sodomized", "flaming-sheep"] // list what you know works
 	if (knownFigures.includes(args[0])) {
 		figure = args[0];
 		message = args.slice(1).join(" ");
@@ -37,11 +33,10 @@ class Cowsay extends Command {
 
 		loopLines(result.split("\n"), 90);
 	} catch (e) {
-		utility.displayErrorMessage("Could not fetch cowsay.");
+		throw new CommandError("Could not fetch cowsay.");
 	}
 }
 
 }
-
 
 export default Cowsay

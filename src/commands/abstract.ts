@@ -1,5 +1,12 @@
 const commandMap = new Map;
 
+class CommandError extends Error {
+	constructor(message: string) {
+		super(message)
+		this.name = "CommandError"
+	}
+}
+
 class Command {
 	name: string;
 	description: string;
@@ -24,4 +31,4 @@ class Command {
 
 }
 
-export {commandMap, Command}
+export {commandMap, Command, CommandError}
