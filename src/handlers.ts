@@ -1,5 +1,6 @@
 import { updateTyper } from "./animation";
 import dom from "./dom";
+import HistoryManager from "./util/HistoryManager";
 import util from "./utility";
 
 function handleInput() {
@@ -17,6 +18,16 @@ function handleKeyDown(event: KeyboardEvent) {
 		dom.typer.textContent = ""; // Clear the visible command line
 		dom.texter.focus(); // Keep focus on texter
 	}
+	if (event.key === "ArrowUp") {
+		const val = HistoryManager.previous();
+		dom.texter.value = val
+		dom.typer.textContent = val
+	}
+	if (event.key === "ArrowDown") {
+		const val = HistoryManager.next();
+		dom.texter.value = val
+		dom.typer.textContent = val
+	}
 }
 function focusTexter() {
     dom.texter.focus();
@@ -27,3 +38,9 @@ function focusTexter() {
 }
 
 export default {focusTexter, handleInput, handleKeyDown}
+
+// history array
+// event handling:
+//		KEY DOWN: decrease index
+//		KEY UP  : increase index
+// Handle "out of reach" error for the array.

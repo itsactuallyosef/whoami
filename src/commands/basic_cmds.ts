@@ -8,7 +8,7 @@ class Clear extends Command {
 		super("clear", "Clears the terminal screen.");
 	}
 
-	async execute(args: any[]) {
+	execute(args: any[]) {
 		dom.terminal.textContent = "";
 	}
 }
@@ -18,7 +18,7 @@ class Exit extends Command {
 		super("exit", "Exits the terminal.");
 	}
 
-	async execute(args: any[]) {
+	execute(args: any[]) {
 		window.close();
 	}
 }
@@ -28,12 +28,11 @@ class Echo extends Command {
 		super("echo", "Prints a message in the terminal.");
 	}
 
-	async execute(args: any[]) {
-		const message = args.join(" ");
-
-		if (!message) {
-			throw new CommandError("Please provide a message to print.", );
+	execute(args: string[]) {
+		if (!args.length) {
+			throw new CommandError("Please provide a message to print.")
 		}
+		const message = args.join(" ");
 
 		util.displayOutputMessage(message);
 	}

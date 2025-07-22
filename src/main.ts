@@ -4,10 +4,11 @@ import handlers from "./handlers";
 import dom from "./dom";
 import ThemeController from "./util/ThemeController";
 import Cowsay from "./commands/cowsay";
-import utility from "./utility";
 
 dom.texter.addEventListener("input", handlers.handleInput);
+
 dom.texter.addEventListener("keydown", handlers.handleKeyDown);
+
 window.addEventListener("click", handlers.focusTexter);
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -1,6 +1,7 @@
 import { typetext } from "./animation";
 import { Command, CommandError, commandMap } from "./commands/abstract";
 import dom from "./dom";
+import HistoryManager from "./util/HistoryManager";
 
 function displayErrorMessage(msg: string) {
 	const errorOutput = document.createElement("p");
@@ -58,6 +59,7 @@ function findCommandByAlias(alias: string): Command | null {
 
 function handleCommand(input: string) {
 	if (!input.trim()) return;
+	HistoryManager.add(input);
 
 	displayOutputMessage(input, true); // echo the command
 
