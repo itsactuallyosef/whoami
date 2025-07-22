@@ -9,9 +9,11 @@ import Social from "./commands/social";
 import Theme from "./commands/theme";
 import Unalias from "./commands/unalias";
 import WhoIsMe from "./commands/whoisme";
+import History from "./commands/history";
 
 
 commandMap.set("help", new Help());
+commandMap.set("history", new History())
 commandMap.set("github", new Github());
 commandMap.set("whoisme", new WhoIsMe());
 commandMap.set("social", new Social());
