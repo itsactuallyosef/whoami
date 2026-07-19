@@ -1,1 +1,1 @@
-(Visit my Portfolio here)[https://itsactuallyosef.github.io/whoami/] 
+[Visit my Portfolio here](https://itsactuallyosef.github.io/whoami/)
